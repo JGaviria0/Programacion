@@ -16,12 +16,10 @@ int dp[limit][100], n, m, number[limit];
 
 int solve(int x, int i){
     
-    if (number[x] - number[x+1] )
+    if (number[x] - number[x+1])
+
     if (x==n) return 1;
-
     
-
-
 
     int &ans = dp[x];
 
