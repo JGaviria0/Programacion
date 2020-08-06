@@ -1,6 +1,6 @@
 /*  
 https://cses.fi/problemset/task/1158
-Metodo: DP(Recursivo)
+Metodo: DP(Iterativo)
 Jhon Alex Gaviria
 */       
 
@@ -46,9 +46,20 @@ int main (){
     for (int i=0; i<n; i++)
         cin >> number[i];
 
-    for (int i =1; i<=m; i++)
-        res = (res + solve(0, i) )%MOD;
+    dp[1][1] = 1; 
+    for (int k =1; k<=m; k++){
+        
+        if (number[0] == 0 || number[0] == k)
+            dp[0][k] = 1;
+        else
+            dp[0][k] = 0;
+    }
+    for (int i =1; i<=n; i++)
+        for (int j = 1; j<=m; j++)
+        {
+            if ()
+        }
+
 
     cout << res << endl;
-
 }
