@@ -41,7 +41,7 @@ int main () {
         for(int j=0; j<104; j++)
         {
             if(dp[i][j] == 1)
-            {
+            { 
                 answ[cont] = i;
                 cont++;
                 break;

@@ -39,9 +39,7 @@ int main () {
             }
         }
     }
-        
-
+      
     cout << dp[a][b] << endl;
 
-    
 }
