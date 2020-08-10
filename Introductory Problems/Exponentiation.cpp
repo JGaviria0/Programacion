@@ -11,7 +11,7 @@ using namespace std;
 int MOD = 1e9 + 7;
 long long aux;
 
-long long solve(int a, int b){
+long long solve(long long a, long long b){
 
     if (b == 0) return 1; 
 
@@ -26,13 +26,10 @@ long long solve(int a, int b){
 
 int main (){
 
-    int a, b, n;
+    long long a, b;
 
-    cin >> n; 
+    cin >> a >>b; 
 
-    while(n--)
-    {
-        cin >> a >> b;
-        cout << solve (a,b) << endl; 
-    } 
+    cout << solve (a,b) << endl; 
+    
 }

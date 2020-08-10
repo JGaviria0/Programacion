@@ -19,7 +19,7 @@ long long powt(long long a, long long b){
             res = res*a%MOD;
         
         a = a*a%MOD; 
-        b >>=1; 
+        b >>=1;  
     }
     return res; 
 }
