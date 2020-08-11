@@ -21,36 +21,33 @@ void build(int i, int b, int e){
         int mid = (b+e)/2, left = i*2, right = left + 1; 
         build(left, b, mid); 
         build(right, mid+1, e); 
-        tree[i] = tree[left] + tree[right]; 
     }
 }
 
-void query(int i, int b, int e, int l){
+long long query(int i, int b, int e, int l){
 
-    if(b>l || l > e) return; 
+    if(b>l || l > e) return 0;
 
     if(l == b && l == e) 
-        cout << tree[i] << endl; 
+        return tree[i]; 
     else
     {
         int mid = (b+e)/2, left = i*2, right = left + 1;
-        query(left, b, mid, l); 
-        query(right, mid+1, e, l);
+        return tree[i] + query(left, b, mid, l) + query(right, mid+1, e, l);
     }
 }
 
 void update(int i, int b, int e, int a, int be, int k){
 
-    if (be < b || e < a) return;
+    if(b>be || a > e) return; 
 
-    if(b == e && b >= a && b < be) 
-        tree[i] += k;  
+    if(b>=a && e<=be) 
+        tree[i] += k; 
     else
     {
-        int mid = (b+e)/2, left = i*2, right = left + 1;
+        long long mid = (b+e)/2, left = i*2, right = left + 1;
         update(left, b, mid, a, be, k);
-        update(right, mid+1, e, a, be, k);
-        tree[i] = tree[left] + tree[right]; 
+        update(right, mid+1, e, a, be, k); 
     }
 }
 
@@ -65,20 +62,19 @@ int main(){
     
     build(1, 0, n-1);
 
-     for(int i=0; i<n*2; i++)
-        cout << tree[i] << " "; 
-
+    // for(int i=0; i<n*2; i++)
+    //     cout << tree[i] << " ";
     while (q--)
     {
         cin >> c >> a;
 
         if (c == 1){
             cin >> b >> d; 
-            update(1,0,n-1,a-1,b,d);
-             for(int i=0; i<n*2; i++)
-                cout << tree[i] << " "; 
+             update(1,0,n-1,a-1,b-1,d);
+            // for(int i=0; i<n*2; i++)
+            //     cout << tree[i] << " ";
         }
         else
-            query(1, 0, n-1, a-1);
+            cout << query(1, 0, n-1, a-1) << endl;
     } 
 }
