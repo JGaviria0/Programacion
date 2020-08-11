@@ -20,7 +20,7 @@ void build(int i, int b, int e){
     {
         int mid = (b+e)/2, left = i*2, right = left + 1; 
         build(left, b, mid); 
-        build(right, mid+1, e); 
+        build(right, mid+1, e);    
     }
 }
 
