@@ -1,4 +1,4 @@
-# Programacion
+# Programación
 Entrenamientos de programación competitiva en c++. 
 
 Gran parte de los ejercicios fueron evaluados por el juez CSES:
