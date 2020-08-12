@@ -3,54 +3,65 @@ https://cses.fi/problemset/task/1652
 Metodo: segment tree
 Jhon Alex Gaviria
 */
-
+ 
 #include <bits/stdc++.h>
-
+ 
 using namespace std; 
-
-int n, tree[800005], lis[800005]; 
-
+ 
+int tree[800005], lis[800005]; 
+ 
 void build(int i, int b, int e){
-    if (b == e)
-        tree[i] = lis[b-1];
-    else{
-        int mid = (b+e)/2, left = i*2, right = left +1;
-        build(left, b, mid);
-        build(right, mid+1, e); 
+ 
+    if(b == e)
+        tree[i] = 1; 
+    else
+    {
+        int mid = (b+e)/2, left = i*2, right = left + 1; 
+        build(left, b, mid); 
+        build(right, mid+1, e);
+        tree[i] = tree[right] + tree[left];     
     }
 }
-
-void query(int i, int b, int e, int a, int be){
-
-    if (b>a || e < a) return;
-
-    if (b == e && a == b){
-        cout << "a = " <<a +tree[i] << endl;
-        cout << tree[i] << " ";
+ 
+void query(int i, int b, int e, int l){
+ 
+    if (b==e)
+    {
+        cout << lis[b] << " "; 
+        tree[i] = 0;
     }
-    else{
-        int mid = (b+e)/2, left = i*2, right = left +1;
-        query(left, b, mid, a + tree[i], be);
-        query(right, mid+1, e, a + tree[i], be);  
-    } 
-
-    if (b==a && e == be) tree[i]++;
+    else {
+        long long mid = (b+e)/2, left = i*2, right = left + 1;
+        if(tree[2*i] >= l) 
+            query(left, b, mid, l);
+        else
+        {
+            query(right, mid+1, e,  l - tree[2*i]);
+        }
+        tree[i] = tree[right] + tree[left];
+    }
+     
 }
-
+ 
 int main ()
 {
-    int a; 
+    int a, n, aux; 
     cin >> n; 
-
-    memset(tree, 0, sizeof tree); 
-
-    for(int i=0; i<n; i++)
+ 
+    for(int i=1; i<=n; i++){
         cin >> lis[i];
+    } 
+ 
+    build(1,1,n);
     
-    build(1, 1, n); 
-    
-    while(n--){
+    for(int i=0; i<n; i++)
+    {
         cin >> a;
-        query(1,1,n,a,n); 
+        query(1,1,n,a); 
+ 
+ 
+        // for(int i=1; i<n*2; i++)
+        //      cout << tree[i] << " ";
+        // cout << endl; 
     }
 }
