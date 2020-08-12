@@ -40,7 +40,6 @@ void query(int i, int b, int e, int l){
         }
         tree[i] = tree[right] + tree[left];
     }
-     
 }
  
 int main ()
