@@ -51,7 +51,6 @@ int main ()
     for(int i=1; i<=n; i++){
         cin >> lis[i];
     } 
- 
     build(1,1,n);
     
     for(int i=0; i<n; i++)
