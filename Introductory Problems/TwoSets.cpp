@@ -8,43 +8,11 @@ Jhon Alex Gaviria
 
 using namespace std; 
 
-int n, add, cont , v, ans[1000006];
-bool flag = true; 
-
-int sets(int i, int sum){
-    if (flag)
-    {
-        if (i > n+1) return 0; 
-
-        if (sum > add/2) return 0; 
-
-        if(sum == add/2) {
-            flag = false;  
-            return 1;
-        } 
-
-        
-        
-        if((sets(i+1, sum +i)) == 1)
-        {
-            cout << i << " "; 
-            return 1;  
-        }
-        if (sets(i+1, sum));
-        {
-            cout << i << " "; 
-        }
-        
-        return 0; 
-    }
-    else
-    {
-        return 0; 
-    }
-     
-}
+long long n, cont , v, ans[4000006], aux, aux2, add;  
 
 int main (){
+
+    ios::sync_with_stdio(0); cin.tie(0);
 
     cin >> n; 
 
@@ -52,12 +20,44 @@ int main (){
 
     if(add %2 != 0)
         cout << "NO" << endl;
-    else{
-        sets(1, 0); 
+    else{ 
+        cout << "YES" << endl;
+        cont = 0; 
+        aux = add/2;
+        aux2 = 0;  
+        int i = n; 
+        while(i>0 && aux2 < aux)
+        {
+            //cout << aux2 << " " << aux << endl; 
+            if( aux - i - aux2 < i && aux - i - aux2 != 0)
+            {
+                ans[i] = 1;  
+                ans[aux - i - aux2] = 1;
+                aux2 += i; 
+                cont +=2; 
+                break;  
+            }
+            else
+            {
+                ans[i] = 1;
+                aux2 += i; 
+                cont++;  
+            }
+            i--; 
+        }
+        cout << cont << endl;
+        for (int i=1; i<=n; i++)
+        {
+            if(ans[i] == 1)
+                cout << i << " "; 
+        }
+        cout <<endl << n - cont << endl; 
 
-        // for(int i=1; i<=n; i++)
-        //     cout << ans[i] << " "; 
+        for (int i=1; i<=n; i++)
+        {
+            if(ans[i] == 0)
+                cout << i << " "; 
+        }
+        cout << endl; 
     } 
-
-
 }
