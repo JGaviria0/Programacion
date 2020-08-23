@@ -2,7 +2,7 @@
 
 using namespace std; 
 
-int n, k, m, spell, power, KAdd, RestAdd, minLight; 
+long long n, k, m, spell, power, KAdd, RestAdd, minLight; 
 
 multiset<int> theK, theRest, light;
 
@@ -41,10 +41,12 @@ void addRestElementNo1 (int n){
 void eraseKElementNo1 (int n){
     KAdd -= n; 
     theK.erase(theK.find(n));
-    theK.insert(- *theRest.begin());
-    KAdd +=- *theRest.begin();
-    RestAdd -= - *theRest.begin();
-    theRest.erase(theRest.begin()); 
+    if(!theRest.empty()){
+        theK.insert(- *theRest.begin());
+        KAdd +=- *theRest.begin();
+        RestAdd -= - *theRest.begin();
+        theRest.erase(theRest.begin()); 
+    }
 }
 
 void eraseKElement1 (int n){
@@ -99,10 +101,10 @@ int main (){
             }
             else
             {
-                if(theRest.find(power) == theRest.end())
+                if(theK.find(- power) != theK.end())
                     eraseKElementNo1(- power);  
                 else
-                    eraseKElementNo1( - power);     
+                    eraseRestElementNo1( - power);     
             } 
         }
         else
