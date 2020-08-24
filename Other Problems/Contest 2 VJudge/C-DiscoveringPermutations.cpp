@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
 using namespace std; 
-
+       
 int t, n, k, cont = 0;
 string aux; 
 
