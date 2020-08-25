@@ -19,7 +19,7 @@ int solve(int j, string w, vector<char> ans){
     }
     for(int i=0; i<ans.size(); i++){
         aux = w + ans.at(i); 
-        ans.erase(ans.begin() + i); 
+        ans.erase(ans.begin() + i);
         solve(j+1,aux, ans);
         ans.push_back(char(i+65));
         solve(j+1, w, ans); 
