@@ -13,7 +13,7 @@ int main (){
 
     cin >> n;
 
-    cout << n << " ";
+    cout << n << " ";    
 
     while(n > 1)
     {
