@@ -8,22 +8,23 @@ Jhon Alex Gaviria
 
 using namespace std;
 
-int BB(int i, int b, int e, int k){
+int n, m, ticket[200005], person[200005];
 
-    if (b == e)
+int BB(int b, int e, int k){
+
+    while (b>=e)
     {
-        if (ticket[b] == k)
-            return b;
-        else
-            return b*-1; 
+        int mid = (b+e)/2; 
+        if(ticket[mid] <= k) {
+            e = mid + 1;
+        } else {
+            b = mid + 1; 
+        }
     }
-    int mid = (b+e)/2, left= i*2; right = left + 1; 
-    if()
+    return b; 
 }
 
 int main (){
-
-    int n, m, ticket[200005], person[200005];
 
     cin >> n >> m; 
 
@@ -34,10 +35,5 @@ int main (){
 
     for(int i=0; i<m; i++)
         cin >> person[i]; 
-    
-    
-
-
-
     
 }
