@@ -27,10 +27,6 @@ int main (){
         in = i;
         total = 0;  
 
-        
-
-        
-
         while(!aux.empty()) {
 
             out = *aux.lower_bound((in.first + t)%s);
