@@ -7,14 +7,9 @@ Jhon Alex Gaviria
 
 using namespace std; 
 
-const int MAXDATA = 1e6 + 6;
-const int oo = 1e9; 
-
 void solve() {
 
-    int n, a[MAXDATA]; 
-
-    cin >> n; 
+    int n, a[1000006]; 
 
     for(int i=0; i<n; i++) {
         cin >> a[i];
