@@ -1,6 +1,6 @@
 /*  
 https://atcoder.jp/contests/dp/tasks/dp_b
-Metodo: 
+Metodo: DP
 Jhon Alex Gaviria
 */
 #include <bits/stdc++.h>
@@ -18,12 +18,8 @@ long long dp(int x, long long a[], int n, int k){
         return oo;
     }
 
-    if(x == n){
+    if(x == n-1){
         return 0; 
-    }
-
-    if(x == n-2){
-        return cache[x] = abs(a[x] - a[x+1]);
     }
 
     if(cache[x] != -1) return cache[x];
