@@ -13,21 +13,12 @@ int cache[MAXDATA];
 
 
 int dp(int x, int a[], int n){
-    // for(int i=0; i<=n; i++){
-    //     cout << cache[i] << " ";
-    // }
-    // cout << endl ;
-
-    if(x > n){
+    if(x >= n){
         return oo;
     }
 
-    if(x == n){
-        return 0; 
-    }
-
-    if(x == n-2){
-        return cache[x] = abs(a[x] - a[x+1]);
+    if(x == n-1){
+        return 0;
     }
 
     if(cache[x] != -1) return cache[x];
