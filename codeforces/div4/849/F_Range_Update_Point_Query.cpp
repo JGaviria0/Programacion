@@ -1,120 +1,77 @@
 /*  
-https://cses.fi/problemset/task/1651
-Metodo: segment tree
+
+Metodo: 
 Jhon Alex Gaviria
 */
- 
 #include <bits/stdc++.h>
- 
+
 using namespace std; 
- 
-const int maxi = 200005; 
- 
-long long number[maxi], tree[maxi];
- 
-void build(int i, int b, int e){
- 
-    if(b == e)
-        tree[i] = number[b]; 
-    else
-    {
-        int mid = (b+e)/2, left = i*2, right = left + 1; 
-        build(left, b, mid); 
-        build(right, mid+1, e); 
+
+const int MAXDATA = 2e5 + 5;
+const int oo = 1e9; 
+
+int sumdig(int n){
+    int sum = 0;
+    while(n > 0){
+        sum += n%10; 
+        n/=10; 
     }
-}
- 
-long long query(int i, int b, int e, int l){
- 
-    if(b>l || l > e) return 0;
- 
-    if(l == b && l == e) 
-        return tree[i]; 
-    else
-    {
-        int mid = (b+e)/2, left = i*2, right = left + 1;
-        return tree[i] + query(left, b, mid, l) + query(right, mid+1, e, l);
-    }
+
+    return sum; 
 }
 
-// long long query(int iterator, int begin, int end, int left, int right){
+void solve() {
 
- 
-//     if(begin > right || left > end) return 0; 
-//     if(begin >= left && end <= right) {
+    int n, aux, q; 
+    set<int> v; 
 
-//         return tree[iterator]; 
-//     } 
-    
-//     int mid = (begin+end)/2, toleft = iterator*2, toright = toleft + 1;
-//     long long ans = query(toleft, begin, mid, left, right) + query(toright, mid+1, end, left, right);
-    
-//     return ans; 
-    
-// }
- 
-void update(int i, int b, int e, int a, int be, int k){
- 
-    if(b>be || a > e) return; 
- 
-    if(b>=a && e<=be) 
-        tree[i] += k; 
-    else
-    {
-        long long mid = (b+e)/2, left = i*2, right = left + 1;
-        update(left, b, mid, a, be, k);
-        update(right, mid+1, e, a, be, k); 
+    cin >> n >> q; 
+    vector<int> fini(n); 
+
+
+    for(int i=0; i<n; i++) {
+        cin >> fini[i];
+        if(fini[i]>9) v.insert(i); 
     }
-}
+    int a, b, c; 
+    while(q--){
+        cin >> a >> b;
+        if(a == 1){
+            cin >> c; 
+            --b; --c; 
+            int last = b; 
+            // cout << "TYPE 1: " << endl;
+            while(!v.empty()){
+                auto pun = v.lower_bound(last);
+                // int pos = pun - v.begin();
+                // cout << pos << " " << v[pos] << endl; 
+                if(*pun > c || pun == v.end()){
+                    break; 
+                }
+                fini[*pun] = sumdig(fini[*pun]);
+                int ai = *pun;
+                if(fini[ai] < 10) v.erase(pun);
 
-void transfor(int n, int numberoftrans){
-    long long auxn = n; 
-    while(auxn>9 && numberoftrans > 0){
-        long long aux = auxn;
-        long long sum = 0; 
-        while(aux > 0){
-            sum += aux%10;
-            aux /= 10; 
+                last = ai + 1; 
+            }  
+        } else {
+            --b; 
+            cout << fini[b] << endl; 
         }
-
-        auxn = sum; 
-        numberoftrans--;
     }
-    cout << auxn << endl; 
 }
- 
-int main(){
- 
-    long long n, q, a, b, c, d, t; 
 
-    cin >> t; 
+int main() {
+    
+    ios::sync_with_stdio(0);
+	cin.tie(0);
+    cout.tie(0);
+    
+    int n, m; 
 
-    while(t--){
+    cin >> n; 
 
-        cin >> n >> q;
-        int arr[maxi];
-    
-        for(int i=0; i<n; i++){
-            cin >> arr[i];
-            number[i] = 0;
-        }
-        
-        build(1, 0, n-1);
-    
-        while (q--)
-        {
-            cin >> c >> a;
-    
-            if (c == 1){
-                cin >> b;
-                update(1,0,n-1,a-1,b-1,1);
-            }
-            else{
-                int aux = query(1, 0, n-1, a-1);
-                // int aux = query(1, 0, n-1, a-1, a-1);
-                transfor(arr[a-1], aux);
-            }
-        } 
+    while(n--) {
+        solve();
     }
- 
 }
